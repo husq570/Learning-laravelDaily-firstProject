@@ -47,15 +47,23 @@ class ProductController extends Controller
             'description' => 'required|min:36',
         ]);
 
-        Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'image' => $request->file('image')->store('product_images', 'public'),
-            'category_id' => $request->category_id,
-            'description' => $request->description,
-        ]);
-
-        $path = $request->file('image')->store('product_images', 'public');
+        if($request->file('image')){
+            Product::create([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => $request->file('image')->store('product_images', 'public'),
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+            ]);
+        }else{
+            Product::create([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => '',
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+            ]);
+        }
 
         return redirect()->route('products.index');
     }
@@ -103,13 +111,23 @@ class ProductController extends Controller
             'description' => 'required|min:36',
         ]);
 
-        $product->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'image' => $request->file('image')->store('product_images', 'public'),
-            'category_id' => $request->category_id,
-            'description' => $request->description,
-        ]);
+        if($request->file('image')){
+            $product->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => $request->file('image')->store('product_images', 'public'),
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+            ]);
+        }else{
+            $product->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => $product->image,
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+            ]);
+        }
 
         return redirect()->route('products.index');
     }
