@@ -49,18 +49,18 @@
           </li>
           @endguest
           @auth
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('products.index') }}">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                @csrf
-            </form>
-          </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
+                    <a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            </li>
           @endauth
         </ul>
       </div>
