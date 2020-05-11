@@ -34,3 +34,6 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Auth::routes();
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

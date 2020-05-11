@@ -38,35 +38,39 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('home') }}">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('about') }}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('services') }}">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                        </li>
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @endguest
+                        @auth
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
+                                    <a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>
