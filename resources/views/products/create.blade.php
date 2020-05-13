@@ -47,6 +47,11 @@
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
+                    <multiselect-component
+                        :options="options"
+                        :selected.sync="selected"
+                        :show-label="false"
+                    ></multiselect-component>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
                 <br />
