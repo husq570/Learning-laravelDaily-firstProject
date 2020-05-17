@@ -27,7 +27,7 @@
                             <span class="text-danger">{{ $errors->first('price') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="category">Category:</label>
                         <select class="form-control" name="category_id">
                             @foreach ($categories as $category)
@@ -38,8 +38,7 @@
                                 @endif
                             @endforeach
                         </select>
-
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <textarea class="form-control" name="description" cols="50" rows="20">

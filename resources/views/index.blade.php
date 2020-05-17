@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-lg-3">
 
-                <h1 class="my-4">Shop Name</h1>
+                <h1 class="my-4">Categories</h1>
                 <div class="list-group">
                     @foreach($categories as $category)
-                        <a href="/?category_id={{ $category->id }}" class="list-group-item">{{ $category->name }}</a>
+                        <a href="/category/{{ $category->id }}" class="list-group-item">{{ $category->name }}</a>
                     @endforeach
                 </div>
 
@@ -59,8 +59,6 @@
                                     </h4>
                                     <h5>${{ $product->price }} </h5>
                                     <p>{{ $product->description }}</p>
-                                    <hr />
-                                    Category: {{ $product->category->name }}
                                 </div>
                             </div>
                         </div>

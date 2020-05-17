@@ -40,7 +40,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -48,22 +47,27 @@ class ProductController extends Controller
         ]);
 
         if($request->file('image')){
-            Product::create([
+            $product = Product::create([
                 'name' => $request->name,
                 'price' => $request->price,
                 'image' => $request->file('image')->store('product_images', 'public'),
-                'category_id' => $request->category_id,
+                //'category_id' => $request->category_id,
                 'description' => $request->description,
             ]);
         }else{
-            Product::create([
+            $product = Product::create([
                 'name' => $request->name,
                 'price' => $request->price,
                 'image' => '',
-                'category_id' => $request->category_id,
+                //'category_id' => $request->category_id,
                 'description' => $request->description,
             ]);
         }
+
+        $categories = \App\Category::all();
+        //$product->categories()->attach($categories); //always adds all
+        //$product->categories()->syncWithoutDetaching($categories); //adds only new
+        $product->categories()->sync($categories); //adds only given
 
         return redirect()->route('products.index');
     }
@@ -116,7 +120,7 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'image' => $request->file('image')->store('product_images', 'public'),
-                'category_id' => $request->category_id,
+                //'category_id' => $request->category_id,
                 'description' => $request->description,
             ]);
         }else{
@@ -124,10 +128,16 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'image' => $product->image,
-                'category_id' => $request->category_id,
+                //'category_id' => $request->category_id,
                 'description' => $request->description,
             ]);
         }
+
+        // attach to categories
+        $categories = \App\Category::all();
+        //$product->categories()->attach($categories); //always adds all
+        //$product->categories()->syncWithoutDetaching($categories); //adds only new
+        $product->categories()->sync($categories); //adds only given
 
         return redirect()->route('products.index');
     }

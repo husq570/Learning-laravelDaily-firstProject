@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('category/{id}', 'ShowCategory@show');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
 });
-
 
 Route::get('/about', function () {
     return view('about');
@@ -33,7 +34,6 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Auth::routes();
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

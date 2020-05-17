@@ -29,15 +29,14 @@
                             <span class="text-danger">{{ $errors->first('price') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="category">Category:</label>
                         <select class="form-control" name="category_id">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
-
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <textarea class="form-control" name="description" cols="50" rows="20">
@@ -47,11 +46,6 @@
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
-                    <multiselect-component
-                        :options="options"
-                        :selected.sync="selected"
-                        :show-label="false"
-                    ></multiselect-component>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
                 <br />
